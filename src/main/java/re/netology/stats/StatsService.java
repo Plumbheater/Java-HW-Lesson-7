@@ -1,12 +1,12 @@
 package re.netology.stats;
 
-public class StatsService {
-    int[] salesAllMonth = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
+import java.security.Provider;
 
+public class StatsService {
 
     public int amountSales(int[] sales) {
         int amount = 0;
-        for (int i = 0; i < salesAllMonth.length; i++) {
+        for (int i = 0; i < sales.length; i++) {
             amount = amount + sales[i];
         }
         return amount;
@@ -14,10 +14,10 @@ public class StatsService {
 
     public int midAmountSales(int[] sales) {
         int midAmount = 0;
-        for (int i = 0; i < salesAllMonth.length; i++) {
+        for (int i = 0; i < sales.length; i++) {
             midAmount = midAmount + sales[i];
         }
-        return midAmount / salesAllMonth.length;
+        return midAmount / sales.length;
     }
 
     public int monthOfMaxSales(int[] sales) {
@@ -45,16 +45,11 @@ public class StatsService {
 
     }
 
+
     public int countMonthsOfLowSalesFromMidAmount(int[] sales) {
-        int midAmount = 0;
-        int lowSales = 0;
         int month = 0;
-        for (int i = 0; i < salesAllMonth.length; i++) {
-            midAmount = midAmount + sales[i];
-        }
-        int x = midAmount / salesAllMonth.length;
         for (long sale : sales) {
-            if (sale < x) {
+            if (sale < midAmountSales(sales)) {
                 month = month + 1;
             }
         }
@@ -62,15 +57,9 @@ public class StatsService {
     }
 
     public int countMonthsOfHighSalesFromMidAmount(int[] sales) {
-        int midAmount = 0;
-        int lowSales = 0;
         int month = 0;
-        for (int i = 0; i < salesAllMonth.length; i++) {
-            midAmount = midAmount + sales[i];
-        }
-        int x = midAmount / salesAllMonth.length;
         for (long sale : sales) {
-            if (sale > x) {
+            if (sale > midAmountSales(sales)) {
                 month = month + 1;
             }
         }
